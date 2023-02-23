@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import telran.util.StackInt;
+
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 class StandardCollectionTest {
 
 	@BeforeEach
@@ -42,7 +46,23 @@ class StandardCollectionTest {
 		//Generate 1000000 random numbers [1-Integer.MAX_VALUE)
 		//Display digits and counts of their occurrences in descending order of the counts
 		//consider using flatMap for getting many from one
+		int[] array = new Random().ints(1000000, 1, Integer.MAX_VALUE).toArray();
+		Arrays.stream(array).forEach(a -> String.valueOf(a).toCharArray());
+		}
+
+	@Test
+	void StackIntTest () {
+		StackInt stack = new StackInt();
+		assertTrue(stack.isEmpty());
+		assertThrowsExactly(NoSuchElementException.class, ()->stack.pop());
+		stack.push(-1);
+		stack.push(20);
+		stack.push(200);
+		stack.push(-23);
+		stack.push(8);
+		assertEquals(8,stack.pop());
+		assertEquals(200,stack.getMax());
+		assertEquals(200,stack.getMaxV2());
+		
 	}
-
-
 }
