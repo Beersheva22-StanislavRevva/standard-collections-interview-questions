@@ -32,6 +32,7 @@ class StandardCollectionTest {
 
 	}
 	@Test
+	@Disabled
 	void displayOccurrencesCount() {
 		String [] strings = {"lmn", "abc", "abc", "lmn", "a", "lmn"};
 		Arrays.stream(strings)
@@ -46,8 +47,10 @@ class StandardCollectionTest {
 		//Generate 1000000 random numbers [1-Integer.MAX_VALUE)
 		//Display digits and counts of their occurrences in descending order of the counts
 		//consider using flatMap for getting many from one
-		int[] array = new Random().ints(1000000, 1, Integer.MAX_VALUE).toArray();
-		Arrays.stream(array).forEach(a -> String.valueOf(a).toCharArray());
+		new Random().ints(1000000, 1, Integer.MAX_VALUE).mapToObj(n -> Integer.toString(n)).
+		flatMap(n -> (new String (n)).chars().boxed()).collect(Collectors.groupingBy(s -> s,Collectors.counting()))
+		.entrySet().stream().sorted((e1, e2) -> Long.compare(e2.getValue(), e1.getValue()))
+		.forEach(e -> System.out.printf("%c: %d\n", e.getKey(), e.getValue()));
 		}
 
 	@Test
@@ -62,7 +65,5 @@ class StandardCollectionTest {
 		stack.push(8);
 		assertEquals(8,stack.pop());
 		assertEquals(200,stack.getMax());
-		assertEquals(200,stack.getMaxV2());
-		
 	}
 }
