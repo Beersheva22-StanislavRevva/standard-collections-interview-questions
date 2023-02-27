@@ -1,50 +1,32 @@
 package telran.util;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import java.util.*;
 public class StackInt {
+	LinkedList<Integer> numbers = new LinkedList<>();
+	LinkedList<Integer> maxNumbers = new LinkedList<>();
 	//Write the following methods
 	//All methods should have complexity O[1]
- public LinkedList<Integer> stackInt = new LinkedList<Integer>();
- public LinkedList<Integer> stackMaxInt = new LinkedList<Integer>();
-
-
- public void push(int num) {
-		stackInt.add(num);
-		if (stackMaxInt.size() == 0 || num > stackMaxInt.getLast()) {
-			stackMaxInt.add(num);
+	void push(int num) {
+		numbers.addLast(num);
+		if (maxNumbers.isEmpty() || num >= maxNumbers.getLast()) {
+			maxNumbers.addLast(num);
 		}
 	}
- public	int pop() {
+	int pop() {
 		//returns a number from top of stack or throws NoSuchElementException
 		//if the stack is empty
-		if (stackInt.size() == 0) {
-			throw new NoSuchElementException();
+		int num = numbers.removeLast();
+		if(num == maxNumbers.getLast()) {
+			maxNumbers.removeLast();
 		}
-		int res = stackInt.getLast();
-		if (res == stackMaxInt.getLast()) {
-			stackMaxInt.removeLast();
-		}
-		stackInt.removeLast();
-		return res;
+		return num;
 	}
- 
- public boolean isEmpty () {
+	boolean isEmpty () {
 		//returns true if the stack is empty, otherwise false
-		return stackInt.size() == 0;
+		return numbers.isEmpty();
 	}
-	
- public int getMax() {
+	int getMax() {
 		//returns maximal value of the stack or throws NoSuchElementException
 		//if the stack is empty
-		if (stackInt.size() == 0) {
-			throw new NoSuchElementException();
-		}
-		return stackMaxInt.getLast();
-			
-		}
- }
+		return maxNumbers.getLast();
+	}
+}
