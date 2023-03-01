@@ -53,7 +53,7 @@ class StandardCollectionTest {
 	}
 	@Test
 	void maxNumberWithNegativeImageTest() {
-		int ar[] = {10000000, 3, -2, -200, 200, -3, 2};
+		int ar[] = {10000000, 3, -2, 200, -200, -3, 2};
 		int ar1[] = {1000000, -1000000000, 3, -4};
 		assertEquals(200, maxNumberWithNegativeImage(ar));
 		assertEquals(-1, maxNumberWithNegativeImage(ar1));
