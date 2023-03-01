@@ -2,8 +2,6 @@ package telran.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Iterator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
